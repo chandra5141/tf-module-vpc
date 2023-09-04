@@ -1,8 +1,8 @@
 locals {
   common_tags = {
     env = var.env
-    project = 'roboshop'
-    business_unit = 'ecommerce'
-    owner = 'ecommerce_robot'
+    project = "roboshop"
+    business_unit = "ecommerce"
+    owner = "ecommerce_robot"
   }
 }
