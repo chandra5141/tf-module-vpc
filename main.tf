@@ -18,3 +18,15 @@ resource "aws_subnet" "main" {
     }
   )
 }
+
+resource "aws_vpc_peering_connection" "foo" {
+  peer_owner_id = data.aws_caller_identity.vpc_owner_id.account_id
+  peer_vpc_id   = "vpc-024f86141cbbc02e6"
+  vpc_id        = aws_vpc.vpc.id
+  auto_accept = true
+  tags = merge(
+    local.common_tags,{
+      Name = "${var.env}-vpc_peering_connection${count.index+1}"
+    }
+  )
+}
