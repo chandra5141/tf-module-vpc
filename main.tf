@@ -48,7 +48,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags = merge(
     local.common_tags,{
-      Name = "${var.env}-vpc_peering_connection"
+      Name = "${var.env}-igw"
     }
   )
 }
