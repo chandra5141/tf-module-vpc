@@ -78,10 +78,18 @@ resource "aws_eip" "eip" {
   vpc = true
 }
 
-resource "aws_nat_gateway" "naw" {
+resource "aws_nat_gateway" "natgw" {
   subnet_id = aws_subnet.public_subnet.*.id[0]
   allocation_id = aws_eip.eip.allocation_id
+
+  tags = merge(
+    local.common_tags,{
+      Name = "${var.env}-NATGW"
+    }
+  )
 }
+
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
@@ -99,7 +107,7 @@ resource "aws_route_table" "private_route-table" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.naw.id
+    nat_gateway_id = aws_nat_gateway.natgw.id
   }
 
   route {
