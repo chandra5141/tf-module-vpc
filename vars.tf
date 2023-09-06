@@ -1,5 +1,5 @@
 variable "cidr_block" {}
 variable "env" {}
-variable "public_subnets_cidr" {}
-variable "private_subnets_cidr" {}
 variable "default_vpc_id" {}
+variable "name" {}
+variable "public_subnets_ids" {}
