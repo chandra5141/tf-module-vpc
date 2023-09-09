@@ -7,8 +7,8 @@ module "public_subnets" {
   for_each    = var.public_subnets
   cidr_block  = each.value.cidr_block
   name        = each.value.name
-  internet_gw = lookup(each.value, "igw", false)
-  nat_gw      = lookup(each.value, "ngw", false)
+  internet_gw = lookup(each.value, "internet_gw", false)
+  nat_gw      = lookup(each.value, "nat_gw", false)
 
   vpc_id                    = aws_vpc.vpc.id
   vpc_peering_connection_id = aws_vpc_peering_connection.aws_vpc_connection.id
@@ -25,8 +25,8 @@ module "private_subnets" {
   for_each    = var.private_subnets
   cidr_block  = each.value.cidr_block
   name        = each.value.name
-  internet_gw = lookup(each.value, "igw", false)
-  nat_gw      = lookup(each.value, "ngw", false)
+  internet_gw = lookup(each.value, "internet_gw", false)
+  nat_gw      = lookup(each.value, "nat_gw", false)
 
   vpc_id                    = aws_vpc.vpc.id
   vpc_peering_connection_id = aws_vpc_peering_connection.aws_vpc_connection.id
