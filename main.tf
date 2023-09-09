@@ -28,7 +28,7 @@ resource "aws_route" "route_for_vpc_peering_created" {
 }
 
 
-resource "aws_internet_gateway" "gw" {
+resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = merge(
