@@ -34,8 +34,10 @@ resource "aws_route_table_association" "rt_association_subnet" {
 }
 
 resource "aws_route" "igw_route" {
+  count                  = var.internet_gw ? 1 : 0
   gateway_id = var.internet_gw
   route_table_id = aws_route_table.route_table.id
+  destination_cidr_block = "0.0.0.0/0"
 }
 
 resource "aws_route" "nat_gw_route" {
