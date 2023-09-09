@@ -1,3 +1,3 @@
 data "aws_vpc" "default" {
-  id = var.vpc_id
+  id = var.default_vpc_id
 }
