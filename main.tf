@@ -22,7 +22,7 @@ resource "aws_vpc_peering_connection" "aws_vpc_connection" {
 
 resource "aws_route" "route_for_vpc_peering_created" {
 
-  route_table_id = data.aws_caller_identity.vpc_owner_id.id
+  route_table_id = data.aws_vpc.default.main_route_table_id
   destination_cidr_block = var.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.aws_vpc_connection.id
 }
