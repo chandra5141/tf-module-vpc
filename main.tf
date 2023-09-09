@@ -27,20 +27,27 @@ resource "aws_route" "route_for_vpc_peering_created" {
   vpc_peering_connection_id = aws_vpc_peering_connection.aws_vpc_connection.id
 }
 
-resource "aws_eip" "eip" {
-  vpc = true
-}
 
-resource "aws_nat_gateway" "natgw" {
-  subnet_id = var.public_subnets_ids[0]
-  allocation_id = aws_eip.eip.allocation_id
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.vpc.id
 
   tags = merge(
-    local.common_tags,{
-      Name = "${var.env}-NATGW"
-    }
+    local.common_tags,
+    { Name = "${var.env}-igw" }
   )
 }
 
+resource "aws_eip" "ngw-eip" {
+  vpc = true
+}
 
+resource "aws_nat_gateway" "ngw" {
+  allocation_id = aws_eip.ngw-eip.id
+  subnet_id     = lookup(lookup(module.public_subnets, "public", null), "subnet_ids", null)[0]
 
+  tags = merge(
+    local.common_tags,
+    { Name = "${var.env}-ngw" }
+  )
+
+}
