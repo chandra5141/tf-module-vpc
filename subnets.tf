@@ -13,7 +13,7 @@ module "public_subnets" {
   vpc_id                    = aws_vpc.vpc.id
   vpc_peering_connection_id = aws_vpc_peering_connection.aws_vpc_connection.id
   tags                      = local.common_tags
-  gateway_id                = aws_internet_gateway.gw.id
+  gateway_id                = aws_internet_gateway.igw.id
 }
 
 module "private_subnets" {
