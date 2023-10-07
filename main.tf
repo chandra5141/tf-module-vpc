@@ -38,7 +38,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_eip" "ngw-eip" {
-  domain = aws_vpc.vpc
+  vpc = true
 }
 
 resource "aws_nat_gateway" "ngw" {
